@@ -37,7 +37,7 @@ def page_header():
         layout="centered",
     )
     st.markdown(
-        f"<h1 style='text-align: center;'>{APP_NAME} {PAGE_ICON} <br> I know all about your data!</h1>",
+        f"<h1 style='text-align: center;'>{APP_NAME} {PAGE_ICON} <br> Your Private LLM Assistant</h1>",
         unsafe_allow_html=True,
     )
 
@@ -118,7 +118,7 @@ def authentication_widget():
             "Authentication", expanded=not st.session_state["auth_ok"]
         ), st.form("authentication"):
             openai_api_key = st.text_input(
-                f"MLV OPEN AI KEY",
+                f"MLV-GPT OPEN AI KEY",
                 type="password",
                 help=OPENAI_HELP,
                 placeholder="Enter Token",
@@ -189,13 +189,13 @@ def select_data_source_widget():
 def chat_interface_widget():
     if len(st.session_state["chat_history"].messages) == 0:
         st.session_state["chat_history"].clear()
-        st.session_state["chat_history"].add_ai_message("How can I help you?")
+        st.session_state["chat_history"].add_ai_message("Speak to MLV-GPT 🤗")
 
     avatars = {"human": "user", "ai": "assistant"}
     for msg in st.session_state["chat_history"].messages:
         st.chat_message(avatars[msg.type]).write(msg.content)
 
-    if user_query := st.chat_input(placeholder="Ask me anything!"):
+    if user_query := st.chat_input(placeholder="enter your curious questions to me ☺️"):
         st.chat_message("user").write(user_query)
 
         with st.chat_message("assistant"):
